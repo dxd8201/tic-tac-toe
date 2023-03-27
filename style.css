@@ -1,0 +1,31 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: rgb(30, 29, 49);
+}
+
+/* ============= */
+/* GameBoard CSS */
+/* ============= */
+
+.game-board-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    width: 21rem;
+    margin: 0 auto;
+}
+
+.game-board-square {
+    border: solid black 1px;
+    background-color: rgb(36, 34, 80);
+    width: 7rem;
+    height: 7rem;
+    box-shadow: 5px 5px 15px 1px rgb(0 0 0 / 34%);
+    color: goldenrod;
+    font-size: 7rem;
+    text-align: center;
+}
