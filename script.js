@@ -25,6 +25,8 @@ const gameBoard = (() => {
 
 //controls players and states of the game
 const gameController = (() => {
+    let victory = false;
+    
     //function factory for generating players
     const playerFactory = (player) => {
         const introduction = () => console.log(`You are ${player}`);
@@ -38,8 +40,6 @@ const gameController = (() => {
     playerOne.introduction();
     playerTwo.introduction();
 
-    
-
     const winCheck = () => {
         if (
             (gameBoard.board[0] === 1 && gameBoard.board[1] === 1 && gameBoard.board[2] === 1) ||
@@ -50,6 +50,7 @@ const gameController = (() => {
             (gameBoard.board[2] === 1 && gameBoard.board[5] === 1 && gameBoard.board[8] === 1) ||
             (gameBoard.board[0] === 1 && gameBoard.board[4] === 1 && gameBoard.board[8] === 1)
             ) {
+            victory = true
             console.log("Player one wins!");
         } else if(
             (gameBoard.board[0] === 2 && gameBoard.board[1] === 2 && gameBoard.board[2] === 2) ||
@@ -60,26 +61,37 @@ const gameController = (() => {
             (gameBoard.board[2] === 2 && gameBoard.board[5] === 2 && gameBoard.board[8] === 2) ||
             (gameBoard.board[0] === 2 && gameBoard.board[4] === 2 && gameBoard.board[8] === 2)
         ) {
+            victory = true;
             console.log("Player two wins!");
         } else {
             console.log("No one has won yet!")
         }
     }   
 
+
+    const gameClickHandler = function (i) {
+        
+    }
+
     for(i=0; i<9; i++) {
         let gameBoardSquareListener = document.querySelectorAll("#gameBoardSquare");
             gameBoardSquareListener[i].addEventListener('click', function(i) {
-                if(gameController.currentPlayer === playerOne) {
+                if(gameController.currentPlayer === playerOne && victory === false) {
                     gameBoard.gameBoardSquare[i].textContent = "X";
                     gameBoard.board[i] = 1;
                     console.log(gameBoard.board);
                     gameController.currentPlayer = playerTwo;
                     winCheck();
-                } else if (gameController.currentPlayer === playerTwo) {
+                } else if (gameController.currentPlayer === playerTwo && victory === false) {
                     gameBoard.gameBoardSquare[i].textContent = "O";
                     gameBoard.board[i] = 2;
                     gameController.currentPlayer = playerOne;
                     winCheck();
+                } else if(victory === true) {
+                    // const removeHandler = (function(i) {
+                    //     gameBoard.gameBoardSquareListener[i].removeEventListener('click', removeHandler)
+                    //     console.log("You removed an event handler")
+                    // })();
                 }
                 console.log(`you clicked Game Board Square ${i}`);
                 this.onclick = null;
