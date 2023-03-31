@@ -18,9 +18,13 @@ const gameBoard = (() => {
         }
     }
 
+    const resetBoard = function () {
+        board = [];
+    }
+
     renderGameBoard();
     console.log(board)
-    return {renderGameBoard, gameBoardSquare, board}
+    return {renderGameBoard, gameBoardSquare, board, resetBoard}
 })();
 
 //controls players and states of the game
@@ -68,15 +72,12 @@ const gameController = (() => {
         }
     }   
 
-
-    const gameClickHandler = function (i) {
-        
-    }
-
     for(i=0; i<9; i++) {
         let gameBoardSquareListener = document.querySelectorAll("#gameBoardSquare");
             gameBoardSquareListener[i].addEventListener('click', function(i) {
-                if(gameController.currentPlayer === playerOne && victory === false) {
+                if (victory === true) {
+                    return
+                } else if(gameController.currentPlayer === playerOne && victory === false) {
                     gameBoard.gameBoardSquare[i].textContent = "X";
                     gameBoard.board[i] = 1;
                     console.log(gameBoard.board);
@@ -87,12 +88,7 @@ const gameController = (() => {
                     gameBoard.board[i] = 2;
                     gameController.currentPlayer = playerOne;
                     winCheck();
-                } else if(victory === true) {
-                    // const removeHandler = (function(i) {
-                    //     gameBoard.gameBoardSquareListener[i].removeEventListener('click', removeHandler)
-                    //     console.log("You removed an event handler")
-                    // })();
-                }
+                } 
                 console.log(`you clicked Game Board Square ${i}`);
                 this.onclick = null;
                 }.bind(null, i), {once: true});

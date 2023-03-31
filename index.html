@@ -12,8 +12,34 @@
 </head>
 <body>
     <div class="page-container">
+        
+        <div class="header-container">
+            <h1>
+                Tic-Tac-Toe
+            </h1>
+            <div class="score-container">
+                <div class="individual-score-container">
+                    <div class="p1"><strong>Player 1 Score:</strong></div>
+                    <div class="score-value" id="p1Score">0</div>
+                </div>
+
+                <div class="individual-score-container">
+                    <div class="current-player"><strong>Current Player:</strong></div>
+                    <div class="player-value" id="currentPlayerValue">0</div>
+                </div>
+
+                <div class="individual-score-container">
+                    <div class="p2"><strong>Player 2 Score:</strong></div>
+                    <div class="score-value" id="p2Score">0</div>
+                </div>
+            </div>
+        </div>
+        
         <div class="game-board-container" id="gameBoardContainer">
 
+        </div>
+        <div class="reset-container">
+            <button class="reset-btn" id="resetBtn">Reset</button>
         </div>
     </div>
 </body>

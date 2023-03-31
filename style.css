@@ -7,6 +7,59 @@ body {
     background-color: rgb(30, 29, 49);
 }
 
+/* =============== */
+/*  Page Container */
+/* =============== */
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ================= */
+/*  Header Container */
+/* ================= */
+
+.header-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: gold;
+    width: 100%;
+    border-bottom: solid 1px black;
+}
+
+.header-container h1 {
+    font-size: 4rem;
+}
+
+/* ================ */
+/*  Score Container */
+/* ================ */
+
+.score-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: space-around;
+    width: 100%;
+    font-size: 2.5rem;
+    box-shadow: 5px 5px 15px 1px rgb(0 0 0 / 34%);
+}
+
+.individual-score-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.individual-score-container > div {
+    margin-bottom: 1rem;
+}
+
 /* ============= */
 /* GameBoard CSS */
 /* ============= */
@@ -17,6 +70,7 @@ body {
     grid-template-rows: repeat(3, 1fr);
     width: 21rem;
     margin: 0 auto;
+    margin-top: 2.5rem;
 }
 
 .game-board-square {
@@ -28,4 +82,27 @@ body {
     color: goldenrod;
     font-size: 7rem;
     text-align: center;
+    transition: all .25s;
+}
+
+.game-board-square:hover {
+    background-color: rgb(45, 42, 99);
+}
+
+/* ========= */
+/* Reset Btn */
+/* ========= */
+
+.reset-btn {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    color: gold;
+    margin-top: 1rem;
+    font-size: 2rem;
+    cursor: pointer;
+    transition: all .50s;
+}
+
+.reset-btn:hover {
+    transform: scale(1.1);
 }
