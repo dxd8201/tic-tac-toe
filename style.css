@@ -42,11 +42,11 @@ body {
 
 .score-container {
     display: flex;
-    justify-content: space-around;
-    align-items: space-around;
+    justify-content: space-between;
     width: 100%;
     font-size: 2.5rem;
-    box-shadow: 5px 5px 15px 1px rgb(0 0 0 / 34%);
+    /* to get rid of box-shadow on the top of an element, set the 4th value (spread) the same as the 3rd value (blur), but negative */
+    box-shadow: 5px 5px 15px -15px rgb(0 0 0 / 34%);
 }
 
 .individual-score-container {
@@ -54,6 +54,10 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+}
+
+.individual-score-container:nth-child(odd) {
+    margin: 0 3rem;
 }
 
 .individual-score-container > div {
@@ -74,6 +78,9 @@ body {
 }
 
 .game-board-square {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: solid black 1px;
     background-color: rgb(36, 34, 80);
     width: 7rem;
@@ -81,7 +88,6 @@ body {
     box-shadow: 5px 5px 15px 1px rgb(0 0 0 / 34%);
     color: goldenrod;
     font-size: 7rem;
-    text-align: center;
     transition: all .25s;
 }
 

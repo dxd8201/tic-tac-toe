@@ -117,7 +117,7 @@ const gameController = (() => {
             let gameBoardSquareListener = document.querySelectorAll("#gameBoardSquare");
                 gameBoardSquareListener[i].addEventListener('click', function(i) {
                     if (gameController.victory === true) {
-                        console.log("Soething happened");
+                        console.log("Something happened");
                         console.log(gameController.victory);
                         console.log(gameBoard.board[i]);
                         return
@@ -125,15 +125,15 @@ const gameController = (() => {
                         gameBoard.gameBoardSquare[i].textContent = "X";
                         gameBoard.board[i] = 1;
                         console.log(gameBoard.board);
+                        winCheck();
                         gameController.currentPlayer = playerTwo;
                         displayController.turnTracker();
-                        winCheck();
                     } else if (gameController.currentPlayer === playerTwo && gameController.victory === false && gameBoard.board[i] === 0) {
                         gameBoard.gameBoardSquare[i].textContent = "O";
                         gameBoard.board[i] = 2;
+                        winCheck();
                         gameController.currentPlayer = playerOne;
                         displayController.turnTracker();
-                        winCheck();
                     } 
                     console.log(`you clicked Game Board Square ${i}`);
                     this.onclick = null;
@@ -157,10 +157,14 @@ const displayController = (() => {
     const btnListener = document.getElementById("resetBtn");
 
     const turnTracker = function () {
-        if(gameController.currentPlayer === gameController.playerOne) {
+        if(gameController.currentPlayer === gameController.playerOne && gameController.victory === false) {
             currentPlayer.textContent = "Player 1";
-        } else if(gameController.currentPlayer === gameController.playerTwo) {
+        } else if(gameController.currentPlayer === gameController.playerTwo && gameController.victory === false) {
             currentPlayer.textContent = "Player 2";
+        } else if(gameController.currentPlayer !== gameController.playerOne && gameController.victory === true) {
+            currentPlayer.textContent = "Player 1 has won!"
+        } else if(gameController.currentPlayer !== gameController.playerTwo && gameController.victory === true) {
+            currentPlayer.textContent = "Player 2 has won!"
         }
     }
     
