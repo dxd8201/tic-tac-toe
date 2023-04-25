@@ -1,4 +1,5 @@
-
+//It looks like gameBoard.board has not been reset after the reset button is clicked. Figure this out. 
+//fixed the bug, now resetbtn only resets the board once. 
 
 
 //module for generating the game board
@@ -18,6 +19,7 @@ const gameBoard = (() => {
 
         for (i=0; i<9; i++) {
             board[i] = 0;
+            console.log(board[i]);
             const gameBoardSquare = document.createElement("div");
             gameBoardElt.appendChild(gameBoardSquare);
             gameBoardSquare.classList.add("game-board-square");
@@ -27,9 +29,14 @@ const gameBoard = (() => {
     }
 
     const resetBoard = function () {
+        for (i=0; i<9; i++) {
+            gameBoard.board[i] = 0;
+        }
+        console.log(gameController.victory);
         board = [];
         renderGameBoard();
         gameController.victory = false;
+        console.log(gameController.victory);
         gameController.currentPlayer = gameController.playerOne;
         displayController.turnTracker();
         console.log("You reset the board!");
@@ -37,9 +44,12 @@ const gameBoard = (() => {
 
     
     resetBoardBtn.addEventListener("click", function() {
+            console.log(gameBoard.board);
             resetBoard();
+            console.log(gameBoard.board);
             gameController.gameSquareListener();
             displayController.btnDisplay();
+            console.log("Board has been reset");
     });
     renderGameBoard();
     console.log(board)
@@ -77,7 +87,7 @@ const gameController = (() => {
             (gameBoard.board[0] === 1 && gameBoard.board[4] === 1 && gameBoard.board[8] === 1) ||
             (gameBoard.board[2] === 1 && gameBoard.board[4] === 1 && gameBoard.board[6] === 1)
             ) {
-            victory = true;
+            gameController.victory = true;
             gameController.playerOneScore += 1;
             displayController.scoreDisplay();
             displayController.btnDisplay();
@@ -92,7 +102,7 @@ const gameController = (() => {
             (gameBoard.board[0] === 2 && gameBoard.board[4] === 2 && gameBoard.board[8] === 2) ||
             (gameBoard.board[2] === 2 && gameBoard.board[4] === 2 && gameBoard.board[6] === 2)
         ) {
-            victory = true;
+            gameController.victory = true;
             gameController.playerTwoScore += 1;
             displayController.scoreDisplay();
             displayController.btnDisplay();
@@ -106,16 +116,19 @@ const gameController = (() => {
         for(i=0; i<9; i++) {
             let gameBoardSquareListener = document.querySelectorAll("#gameBoardSquare");
                 gameBoardSquareListener[i].addEventListener('click', function(i) {
-                    if (victory === true) {
+                    if (gameController.victory === true) {
+                        console.log("Soething happened");
+                        console.log(gameController.victory);
+                        console.log(gameBoard.board[i]);
                         return
-                    } else if(gameController.currentPlayer === playerOne && victory === false) {
+                    } else if(gameController.currentPlayer === playerOne && gameController.victory === false && gameBoard.board[i] === 0) {
                         gameBoard.gameBoardSquare[i].textContent = "X";
                         gameBoard.board[i] = 1;
                         console.log(gameBoard.board);
                         gameController.currentPlayer = playerTwo;
                         displayController.turnTracker();
                         winCheck();
-                    } else if (gameController.currentPlayer === playerTwo && victory === false) {
+                    } else if (gameController.currentPlayer === playerTwo && gameController.victory === false && gameBoard.board[i] === 0) {
                         gameBoard.gameBoardSquare[i].textContent = "O";
                         gameBoard.board[i] = 2;
                         gameController.currentPlayer = playerOne;
@@ -124,8 +137,11 @@ const gameController = (() => {
                     } 
                     console.log(`you clicked Game Board Square ${i}`);
                     this.onclick = null;
-                    }.bind(null, i), {once: true});
+                    }.bind(null, i));
+                    console.log("Game board square should have been added");
         } 
+
+        
         
     }
     gameSquareListener();
